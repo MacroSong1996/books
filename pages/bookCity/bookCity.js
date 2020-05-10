@@ -127,11 +127,5 @@ Page({
     wx.navigateTo({
       url: '../../pages/bookAbstract/bookAbstract?id='+id,
     })
-  },
-  //查看更多免费书籍
-  toMoreBooks:function(){
-    wx.navigateTo({
-      url: '../../pages/freeBooks/freeBooks',
-    })
   }
 })
