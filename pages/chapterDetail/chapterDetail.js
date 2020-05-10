@@ -18,30 +18,28 @@ Page({
     bgColor:'#fff',
     setShow:false,
     showSetting:false,
-    getChapter:true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const that = this
-    const bookid = options.bookid
+    let bookid = options.bookid
     let chapterid = options.chapterid
     let book_name = options.bookTitle
     let isSelect = options.isSelect
-    that.getUserSetting()
+    this.getUserSetting()
     wx.setNavigationBarTitle({
       title: book_name
     })
-    that.setData({
+    this.setData({
       bookid: bookid,
       chapterid: chapterid,
       book_name: book_name,
       isSelect: isSelect
     }, () => {
-      that.getCountent()
-      //that.getChapterList()
+      this.getChapterList()
+      this.getCountent()
     })
   },
 
@@ -154,8 +152,7 @@ Page({
       success: function (res) {
         if (res.data.code == 200) {
           that.setData({
-            chapterList:res.data.data,
-            getChapter:false
+            chapterList:res.data.data
           })
         } else {
           wx.showToast({
@@ -168,7 +165,7 @@ Page({
         console.log('网络出错');
       },
       complete: function () {
-        wx.hideLoading()
+        
       }
     })
   },
@@ -229,18 +226,14 @@ Page({
 
   //显示章节遮罩层
   showChapterList:function(){
-    const that = this
-    if (that.data.getChapter){
-      that.getChapterList()
-    }
     if (parseInt(this.data.chapterid) >= 10){
-      that.setData({
+      this.setData({
         hideChapterList: false,
         showSetting:false,
         toView: 'inToView' + parseInt(this.data.chapterid - 5)
       })
     }else{
-      that.setData({
+      this.setData({
         hideChapterList: false,
         showSetting:false
       })
